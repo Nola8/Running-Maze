@@ -31,4 +31,22 @@ visited = [[False] * C for _ in range(R)]
 start_cell = None   # [row, 0]  — left edge
 end_cell   = None   # [row, C-1] — right edge
 
+def reset():
+    """Reset all arrays to initial state (all walls intact)."""
+    global northWall, eastWall, visited, start_cell, end_cell
+    northWall  = [[1] * C for _ in range(R + 1)]
+    eastWall   = [[1] * (C + 1) for _ in range(R)]
+    visited    = [[False] * C for _ in range(R)]
+    start_cell = None
+    end_cell   = None
 
+def remove_wall(r1, c1, r2, c2):
+    """Remove the wall between adjacent cells (r1,c1) and (r2,c2)."""
+    if r2 == r1 + 1:           # neighbour is above
+        northWall[r1 + 1][c1] = 0
+    elif r2 == r1 - 1:         # neighbour is below
+        northWall[r1][c1] = 0
+    elif c2 == c1 + 1:         # neighbour is to the right
+        eastWall[r1][c1 + 1] = 0
+    elif c2 == c1 - 1:         # neighbour is to the left
+        eastWall[r1][c1] = 0
