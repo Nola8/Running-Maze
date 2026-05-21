@@ -1,4 +1,4 @@
-# generator.py  —  Member 2
+# generator.py
 # Implements the DFS 'mouse' maze generation algorithm.
 
 import random
