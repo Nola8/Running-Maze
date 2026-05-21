@@ -43,5 +43,18 @@ def generate_maze(draw_callback=None, delay_ms=15):
             stack.pop()
 
     # After maze is built, create start and end openings
-    
+    _create_openings()
+
+def _create_openings():
+    """Create entrance (left edge) and exit (right edge) openings."""
+    # Start: random row, left edge (remove eastWall phantom column)
+    sr = random.randint(0, config.R - 1)
+    config.eastWall[sr][0] = 0          # gap in left edge
+    config.start_cell = (sr, 0)
+
+    # End: random row, right edge (remove eastWall at column C)
+    er = random.randint(0, config.R - 1)
+    config.eastWall[er][config.C] = 0   # gap in right edge
+    config.end_cell = (er, config.C - 1)
+
 
