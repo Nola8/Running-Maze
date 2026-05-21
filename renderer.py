@@ -43,3 +43,66 @@ def draw_grid(screen):
     pygame.draw.line(screen, WHITE, (0, 0), (0, HEIGHT), 2)
     pygame.draw.line(screen, WHITE, (0, HEIGHT), (WIDTH, HEIGHT), 2)
     pygame.display.update()
+
+def draw_start_end(screen):
+    
+    start_y = 0
+    pygame.draw.line(screen, GRAY,
+                     (0, start_y + 2),
+                     (0, start_y + CELL_SIZE - 2), 4)
+ 
+    end_x = (C - 1) * CELL_SIZE
+    pygame.draw.line(screen, GRAY,
+                     (end_x + 2, HEIGHT),
+                     (end_x + CELL_SIZE - 2, HEIGHT), 4)
+ 
+    font = pygame.font.SysFont(None, 20)
+    screen.blit(font.render("S", True, BLUE),  (4, 4))
+    screen.blit(font.render("E", True, RED),
+                ((C - 1) * CELL_SIZE + 4, (R - 1) * CELL_SIZE + 4))
+
+def draw_maze(screen, mouse_row=None, mouse_col=None):
+    
+    screen.fill(GRAY)
+ 
+    for row in range(R):
+        for col in range(C):
+            if not visited[row][col]:
+                continue
+            x, y = cell_to_screen(row, col)
+            if row == 0 and col == 0:
+                colour = BLUE
+            elif row == R - 1 and col == C - 1:
+                colour = RED 
+            else:
+                colour = GREEN
+            pygame.draw.rect(screen, colour,
+                             (x + 1, y + 1, CELL_SIZE - 2, CELL_SIZE - 2))
+ 
+    if mouse_row is not None:
+        x, y = cell_to_screen(mouse_row, mouse_col)
+        pygame.draw.rect(screen, PURPLE,
+                         (x + 1, y + 1, CELL_SIZE - 2, CELL_SIZE - 2))
+        cx = x + CELL_SIZE // 2
+        cy = y + CELL_SIZE // 2
+        pygame.draw.circle(screen, WHITE, (cx, cy), CELL_SIZE // 6)
+ 
+    for row in range(R):
+        for col in range(C):
+            x, y = cell_to_screen(row, col)
+ 
+            if northWall[row][col]:
+                pygame.draw.line(screen, WHITE,
+                                 (x, y), (x + CELL_SIZE, y), 2)
+ 
+            if eastWall[row][col]:
+                pygame.draw.line(screen, WHITE,
+                                 (x + CELL_SIZE, y),
+                                 (x + CELL_SIZE, y + CELL_SIZE), 2)
+ 
+    pygame.draw.line(screen, WHITE, (0, 0), (0, HEIGHT), 2)
+    pygame.draw.line(screen, WHITE, (0, HEIGHT), (WIDTH, HEIGHT), 2)
+ 
+    draw_start_end(screen)
+ 
+    pygame.display.update()
