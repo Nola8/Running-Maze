@@ -1,4 +1,3 @@
-
 #Grid Dimensions Row and Column
 R = 12
 C = 18
@@ -32,7 +31,6 @@ start_cell = None   # [row, 0]  — left edge
 end_cell   = None   # [row, C-1] — right edge
 
 def reset():
-    """Reset all arrays to initial state (all walls intact)."""
     global northWall, eastWall, visited, start_cell, end_cell
     northWall  = [[1] * C for _ in range(R + 1)]
     eastWall   = [[1] * (C + 1) for _ in range(R)]

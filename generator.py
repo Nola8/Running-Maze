@@ -1,15 +1,7 @@
-# generator.py
-# Implements the DFS 'mouse' maze generation algorithm.
-
 import random
 import config
 
 def generate_maze(draw_callback=None, delay_ms=15):
-    """
-    Generate a proper maze using iterative DFS (stack-based mouse).
-    draw_callback: optional function called after each wall removal,
-                   receives (mouse_r, mouse_c) for animation.
-    """
     config.reset()
 
     # Place mouse at a random starting cell

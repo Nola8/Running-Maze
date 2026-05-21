@@ -20,6 +20,7 @@ RED    = (220, 100,  80)
 GRAY   = (40,   40,  40) 
 
 
+
 northWall = [[True] * C for _ in range(R)]
 eastWall  = [[True] * C for _ in range(R)]
 visited   = [[False] * C for _ in range(R)]

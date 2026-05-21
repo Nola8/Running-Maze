@@ -1,15 +1,6 @@
-# solver.py  —  Member 4
-# Backtracking DFS maze solver.
-
 import config
 
 def solve_maze(draw_callback=None):
-    """
-    Solve the maze using iterative backtracking DFS.
-    draw_callback: optional function(stack, dead_cells) called each step.
-    Returns: list of (r,c) tuples representing the solution path,
-             or None if no path exists.
-    """
     if not config.start_cell or not config.end_cell:
         raise RuntimeError('Maze not generated yet. Run generator first.')
 
@@ -51,10 +42,9 @@ def solve_maze(draw_callback=None):
         if draw_callback:
             draw_callback(list(stack), dead_cells)
 
-    return None   # no solution (should not happen in a proper maze)
+    return None
 
 def _neighbor(r, c, direction):
-    """Return (nr, nc) for the cell in the given direction, or (None,None)."""
     if direction == 'N' and r + 1 < config.R:  return r + 1, c
     if direction == 'S' and r - 1 >= 0:        return r - 1, c
     if direction == 'E' and c + 1 < config.C:  return r, c + 1
