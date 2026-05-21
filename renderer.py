@@ -1,4 +1,5 @@
 import pygame
+import time
 
 #dummy data for testing
 R          = 15        
@@ -106,3 +107,22 @@ def draw_maze(screen, mouse_row=None, mouse_col=None):
     draw_start_end(screen)
  
     pygame.display.update()
+
+def erase_wall_effect(screen, row, col, direction):
+    x, y = cell_to_screen(row, col)
+ 
+    if direction == 'N':
+        pygame.draw.line(screen, GRAY, (x + 1, y), (x + CELL_SIZE - 1, y), 3)
+    elif direction == 'E':
+        pygame.draw.line(screen, GRAY,
+                         (x + CELL_SIZE, y + 1),
+                         (x + CELL_SIZE, y + CELL_SIZE - 1), 3)
+    elif direction == 'S':
+        ny = y + CELL_SIZE
+        pygame.draw.line(screen, GRAY, (x + 1, ny), (x + CELL_SIZE - 1, ny), 3)
+    elif direction == 'W':
+        pygame.draw.line(screen, GRAY,
+                         (x, y + 1), (x, y + CELL_SIZE - 1), 3)
+ 
+    pygame.display.update()
+    time.sleep(STEP_DELAY)        
