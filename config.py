@@ -48,3 +48,20 @@ def remove_wall(r1, c1, r2, c2):
         eastWall[r1][c1 + 1] = 0
     elif c2 == c1 - 1:         # neighbour is to the left
         eastWall[r1][c1] = 0
+
+def get_unvisited_neighbors(r, c):
+    """Return list of unvisited adjacent cells."""
+    neighbors = []
+    if r + 1 < R  and not visited[r+1][c]: neighbors.append((r+1, c))
+    if r - 1 >= 0 and not visited[r-1][c]: neighbors.append((r-1, c))
+    if c + 1 < C  and not visited[r][c+1]: neighbors.append((r, c+1))
+    if c - 1 >= 0 and not visited[r][c-1]: neighbors.append((r, c-1))
+    return neighbors
+
+def can_move(r, c, direction):
+    """Check if there is no wall blocking movement from (r,c)."""
+    if direction == 'N': return r+1 < R  and northWall[r+1][c] == 0
+    if direction == 'S': return r-1 >= 0 and northWall[r][c]   == 0
+    if direction == 'E': return c+1 < C  and eastWall[r][c+1]  == 0
+    if direction == 'W': return c-1 >= 0 and eastWall[r][c]    == 0
+    return False
