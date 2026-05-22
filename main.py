@@ -5,13 +5,12 @@ import solver
 import renderer
 import config
 
-def add_bonus_cycles(probability=0.05):
-
-    for r in range(config.R):
-        for c in range(config.C - 1):
-            if config.eastWall[r][c+1] == 1:  # wall still intact
-                if random.random() < probability:
-                    config.eastWall[r][c+1] = 0   # eat it
+# def add_bonus_cycles(probability=0.05):
+#     for r in range(config.R):
+#         for c in range(config.C - 1):
+#             if config.eastWall[r][c+1] == 1:
+#                 if random.random() < probability:
+#                     config.eastWall[r][c+1] = 0
 
 def main():
     animator.init()
