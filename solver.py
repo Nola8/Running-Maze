@@ -7,21 +7,18 @@ def solve_maze(draw_callback=None):
     sr, sc = config.start_cell
     er, ec = config.end_cell
 
-    # Track which cells the solver has visited
     solve_visited = [[False] * config.C for _ in range(config.R)]
     solve_visited[sr][sc] = True
 
-    stack = [(sr, sc)]      # current path (also the solve stack)
-    dead_cells = set()      # cells that led to dead ends (drawn blue)
+    stack = [(sr, sc)]
+    dead_cells = set()
 
     while stack:
         r, c = stack[-1]
-
-        # SUCCESS: reached the end
         if r == er and c == ec:
             if draw_callback:
                 draw_callback(list(stack), dead_cells)
-            return list(stack)   # the solution path
+            return list(stack)
 
         moved = False
         for direction in ['N', 'E', 'S', 'W']:
@@ -32,10 +29,9 @@ def solve_maze(draw_callback=None):
                 solve_visited[nr][nc] = True
                 stack.append((nr, nc))
                 moved = True
-                break   # move one step at a time for animation
+                break
 
         if not moved:
-            # Dead end — backtrack
             dead_cells.add((r, c))
             stack.pop()
 

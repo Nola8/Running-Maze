@@ -12,10 +12,10 @@ WIN_H = R * CELL_SIZE + 2 * MARGIN
 # Colors
 WHITE      = (255, 255, 255)
 BLACK      = (  0,   0,   0)
-GREEN      = ( 34, 177,  76)   # mouse / active cell
+GREEN      = ( 34, 177,  76)   # mouse cell
 RED        = (220,  50,  50)   # solver path
 BLUE       = ( 66, 133, 244)   # dead-end cells
-ORANGE     = (230, 126,  34)   # start / end markers
+ORANGE     = (230, 126,  34)   # start or end markers
 WALL_COLOR = (  0,   0,   0)   # maze walls
 BG_COLOR   = (255, 255, 255)   # background
 
@@ -39,7 +39,6 @@ def reset():
     end_cell   = None
 
 def remove_wall(r1, c1, r2, c2):
-    """Remove the wall between adjacent cells (r1,c1) and (r2,c2)."""
     if r2 == r1 + 1:           # neighbour is above
         northWall[r1 + 1][c1] = 0
     elif r2 == r1 - 1:         # neighbour is below
@@ -50,7 +49,6 @@ def remove_wall(r1, c1, r2, c2):
         eastWall[r1][c1] = 0
 
 def get_unvisited_neighbors(r, c):
-    """Return list of unvisited adjacent cells."""
     neighbors = []
     if r + 1 < R  and not visited[r+1][c]: neighbors.append((r+1, c))
     if r - 1 >= 0 and not visited[r-1][c]: neighbors.append((r-1, c))
@@ -59,7 +57,6 @@ def get_unvisited_neighbors(r, c):
     return neighbors
 
 def can_move(r, c, direction):
-    """Check if there is no wall blocking movement from (r,c)."""
     if direction == 'N': return r+1 < R  and northWall[r+1][c] == 0
     if direction == 'S': return r-1 >= 0 and northWall[r][c]   == 0
     if direction == 'E': return c+1 < C  and eastWall[r][c+1]  == 0

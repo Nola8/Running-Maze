@@ -38,7 +38,6 @@ def main():
     else:
         print('No solution found (this should never happen).')
 
-    # ── Step 6: Wait until user closes the window ────────────────
     animator.wait_for_quit()
 
 if __name__ == '__main__':

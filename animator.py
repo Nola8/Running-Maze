@@ -4,8 +4,8 @@ import renderer
 
 clock = None
 screen = None
-GENERATION_SPEED = 30   # milliseconds between generation frames
-SOLVE_SPEED      = 20   # milliseconds between solve frames
+GENERATION_SPEED = 30
+SOLVE_SPEED = 20
 
 def init():
     global clock, screen
@@ -55,7 +55,6 @@ def solve_frame(path, dead_cells):
     pygame.time.delay(SOLVE_SPEED)
 
 def show_solution(solution_path):
-    """Highlight the final solution path after solving is complete."""
     renderer.draw_maze(screen)
     for r, c in solution_path:
         renderer.draw_cell_color(screen, r, c, (255, 200, 200))
@@ -63,7 +62,6 @@ def show_solution(solution_path):
     pygame.display.flip()
 
 def wait_for_quit():
-    """Keep window open until user closes it."""
     while True:
         if not handle_events():
             break
